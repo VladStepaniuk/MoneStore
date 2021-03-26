@@ -1,0 +1,65 @@
+﻿@model CategoryIndexModel
+
+@{
+    ViewData["Title"] = "Category";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        @if (Model.Categories.Any())
+        {
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Category Image</th>
+                    <th scope="col">Category Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Categories)
+                {
+                    <tr>
+                        <th scope="row">@item.Id</th>
+                        <td><img id="profilePicture" alt="profile" class="profile-picture" src="data:image/*;base64,@(Convert.ToBase64String(item.ImageCategory))" /></td>
+                        <td>@item.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+        else
+        {
+            <h3>Looks like here is no categories :(</h3>
+        }
+    </div>
+    <div class="col-md-4">
+        <form id="category-form" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Category.Name"></label>
+                <input asp-for="Category.Name" class="form-control" />
+                <span asp-validation-for="Category.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @if (Model.Category.ImageCategory != null)
+                {
+                    <img id="categoryPicture" alt="category" class="profile-picture" src="data:image/*;base64,@(Convert.ToBase64String(Model.Category.ImageCategory))" />
+                }
+                else
+                {
+                    <img id="categoryPicture" alt="profile" class="profile-picture" src="~/images/avatar-male.jpg" />
+                }
+                <div class="custom-file mt-2">
+                    <input type="file"
+                           accept="image/*"
+                           asp-for="Category.ImageCategory"
+                           class="custom-file-input"
+                           onchange="document.getElementById('categoryPicture').src = window.URL.createObjectURL(this.files[0])" />
+                    <label class="custom-file-label" asp-for="Category.ImageCategory">Choose picture...</label>
+                    <span asp-validation-for="Category.ImageCategory" class="text-danger"></span>
+                </div>
+            </div>
+    </form>
+</div>
+</div>
