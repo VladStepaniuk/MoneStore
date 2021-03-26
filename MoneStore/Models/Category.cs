@@ -17,9 +17,4 @@ namespace MoneStore.Models
         public IEnumerable<Product> Products { get; set; }
     }
 
-    public class CategoryIndexModel
-    {
-        public Category Category { get; set; }
-        public IEnumerable<Category> Categories { get; set; }
-    }
 }

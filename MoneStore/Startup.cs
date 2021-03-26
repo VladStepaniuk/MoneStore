@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MoneStore.Data;
 using MoneStore.Models;
+using MoneStore.Work.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,8 @@ namespace MoneStore
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped<ICategoryRepository, CategoryRepositoryImpl>();
 
             services.AddControllersWithViews();
             

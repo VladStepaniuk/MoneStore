@@ -23,11 +23,7 @@ namespace MoneStore.Work
         {
             get
             {
-                if(this.categoryRepository == null)
-                {
-                    this.categoryRepository = new GenericRepository<Category>(_context);
-                }
-                return categoryRepository;
+                return new GenericRepository<Category>(_context);
             }
         }
 

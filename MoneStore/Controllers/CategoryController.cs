@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MoneStore.Models;
+using MoneStore.Models.ViewModels;
 using MoneStore.Work;
+using MoneStore.Work.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +12,24 @@ namespace MoneStore.Controllers
 {
     public class CategoryController : Controller
     {
-        private UnitOfWork _unitOfWork;
+        //TODO: Make project use unit of work and repository pattern
+        //private UnitOfWork _unitOfWork;
+        private CategoryManager _categoryManager;
 
-        public CategoryController(UnitOfWork unitOfWork)
+        public CategoryController(CategoryManager categoryManager)
         {
-            _unitOfWork = unitOfWork;
+            _categoryManager = categoryManager;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var model = new CategoryIndexModel
+            var viewModel = new CategoryIndexViewModel
             {
-                Categories = _unitOfWork.CategoryRepository.Get(includeProperties: "Products")
+                Category = null,
+                Categories = await _categoryManager.GetCategories()
             };
-            return View(model);
+            return View(viewModel);
         }
 
         [HttpPost]
