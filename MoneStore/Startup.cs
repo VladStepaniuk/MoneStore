@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MoneStore.Data;
 using MoneStore.Models;
+using MoneStore.Work.Managers;
 using MoneStore.Work.Repository;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,9 @@ namespace MoneStore
                 .AddDefaultTokenProviders();
 
             services.AddScoped<ICategoryRepository, CategoryRepositoryImpl>();
+            services.AddTransient<ICategoryRepository, CategoryRepositoryImpl>();
+
+            services.AddScoped<CategoryManager>();
 
             services.AddControllersWithViews();
             

@@ -1,4 +1,4 @@
-﻿@model CategoryIndexViewModel
+﻿@model IEnumerable<Category>
 @using MoneStore.Models.ViewModels
 
 @{
@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-md-8">
-        @if (Model.Categories.Any())
+        @if (Model.Any())
         {
         <table class="table">
             <thead class="thead-dark">
@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Categories)
+                @foreach (var item in Model)
                 {
                     <tr>
                         <th scope="row">@item.Id</th>
@@ -34,7 +34,7 @@
             <h3>Looks like here is no categories :(</h3>
         }
     </div>
-    <div class="col-md-4">
+    @*<div class="col-md-4">
         <form id="category-form" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -61,6 +61,6 @@
                     <span asp-validation-for="Category.ImageCategory" class="text-danger"></span>
                 </div>
             </div>
-    </form>
-</div>
+    </form>*@
+@*</div>*@
 </div>

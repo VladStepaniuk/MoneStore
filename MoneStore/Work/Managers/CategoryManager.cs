@@ -17,9 +17,9 @@ namespace MoneStore.Work.Managers
             _categoryRepository = categoryRepository;
         }
 
-        public Task<IEnumerable<Category>> GetCategories()
+        public IEnumerable<Category> GetCategories()
         {
-            return _categoryRepository.GetCategories();
+            return _categoryRepository.GetCategoryList();
         }
     }
 }

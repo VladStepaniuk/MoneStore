@@ -34,7 +34,7 @@ namespace MoneStore.Work.Repository
             return await _context.Categories.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Category>> GetCategories()
+        public IEnumerable<Category> GetCategoryList()
         {
             return _context.Categories.ToList();
         }

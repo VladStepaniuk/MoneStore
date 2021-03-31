@@ -22,14 +22,15 @@ namespace MoneStore.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var viewModel = new CategoryIndexViewModel
-            {
-                Category = null,
-                Categories = await _categoryManager.GetCategories()
-            };
-            return View(viewModel);
+            //var viewModel = new CategoryIndexViewModel
+            //{
+            //    Category = null,
+            //    Categories = await _categoryManager.GetCategories()
+            //};
+            var model = _categoryManager.GetCategories();
+            return View(model);
         }
 
         [HttpPost]
