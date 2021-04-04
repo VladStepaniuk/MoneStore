@@ -11,7 +11,7 @@ namespace MoneStore.Work.Repository
         Task<Category> GetById(int id);
         Task Add(Category category);
         Task Delete(int categoryId);
-        IEnumerable<Category> GetCategoryList();
+        Task<IList<Category>> GetCategoryList();
         Task Update(Category category);
     }
 }

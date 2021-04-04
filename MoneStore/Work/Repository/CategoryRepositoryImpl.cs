@@ -1,4 +1,5 @@
-﻿using MoneStore.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MoneStore.Data;
 using MoneStore.Models;
 using System;
 using System.Collections.Generic;
@@ -34,14 +35,15 @@ namespace MoneStore.Work.Repository
             return await _context.Categories.FindAsync(id);
         }
 
-        public IEnumerable<Category> GetCategoryList()
+        public async Task<IList<Category>> GetCategoryList()
         {
-            return _context.Categories.ToList();
+            return await _context.Categories.Include(c => c.Products).ToListAsync();
         }
 
-        public Task Update(Category category)
+        public async Task Update(Category category)
         {
-            throw new NotImplementedException();
+            _context.Entry(category).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }

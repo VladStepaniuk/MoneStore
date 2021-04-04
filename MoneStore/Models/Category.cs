@@ -10,7 +10,7 @@ namespace MoneStore.Models
     {
         public int Id { get; set; }
         [Required]
-        [StringLength (3, ErrorMessage ="Category name must be at least 3 characyers and at max 50 characters.", MinimumLength =50)]
+        [StringLength (50, ErrorMessage ="Category name must be at least 3 characters and at max 50 characters.", MinimumLength =3)]
         public string Name { get; set; }
         [Required]
         public byte[] ImageCategory { get; set; }
