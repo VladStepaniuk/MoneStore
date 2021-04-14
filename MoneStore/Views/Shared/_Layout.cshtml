@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - MoneStore</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
 <body>
     <header>
@@ -27,12 +28,12 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" ownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" ownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Admin Link
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" asp-controller="Category" asp-action="Index">Category</a>
-                                    <a class="dropdown-item" href="#">Products</a>
+                                    <a class="dropdown-item" asp-controller="Products" asp-action="Index">Products</a>
                                     <a class="dropdown-item" href="#">Another</a>
                                 </div>
                             </li>

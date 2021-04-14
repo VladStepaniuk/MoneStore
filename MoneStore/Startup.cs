@@ -43,6 +43,9 @@ namespace MoneStore
             services.AddScoped<ICategoryRepository, CategoryRepositoryImpl>();
             services.AddTransient<ICategoryRepository, CategoryRepositoryImpl>();
 
+            services.AddScoped<IProductRepository, ProductRepositoryImpl>();
+            services.AddTransient<IProductRepository, ProductRepositoryImpl>();
+
             services.AddScoped<CategoryManager>();
 
             services.AddControllersWithViews();
