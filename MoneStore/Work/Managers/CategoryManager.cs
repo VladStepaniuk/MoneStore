@@ -50,5 +50,11 @@ namespace MoneStore.Work.Managers
         {
             await _categoryRepository.Update(category);
         }
+
+        public async Task<IList<Category>> GetCategoriesForHomePage()
+        {
+            var categories = await _categoryRepository.GetCategoryList();
+            return categories.Skip(Math.Max(0, categories.Count() - 5)).ToList();
+        }
     }
 }

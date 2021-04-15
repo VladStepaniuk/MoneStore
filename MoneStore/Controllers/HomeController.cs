@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MoneStore.Models;
+using MoneStore.Models.ViewModels;
+using MoneStore.Work.Managers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,18 +14,34 @@ namespace MoneStore.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private CategoryManager _categoryManager;
+        private ProductManager _productManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, 
+            CategoryManager categoryManager,
+            ProductManager productManager)
         {
             _logger = logger;
+            _categoryManager = categoryManager;
+            _productManager = productManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            var model = new HomeIndexViewModel
+            {
+                Categories = await _categoryManager.GetCategoriesForHomePage(),
+                Products =await _productManager.GetProductList()
+            };
+            return View(model);
+        }
+
+        public IActionResult Privacy()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Products(int? id)
         {
             return View();
         }

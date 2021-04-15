@@ -1,8 +1,49 @@
-﻿@{
+﻿@model MoneStore.Models.ViewModels.HomeIndexViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group-vertical">
+            <ul>
+                @foreach (var item in Model.Categories)
+                {
+                    <li>
+                        <a class="btn-block" asp-controller="Home" asp-action="Products" asp-route-id="@item.Id">@item.Name</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/images/mountain.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/pixel.jpeg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/Без названия (3).jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div>
+    @foreach (var item in Model.Products)
+    {
+        <div class="card" style="width: 18rem;">
+            <img src="data:image/*;base64,@(Convert.ToBase64String(item.PreviewIage))" class="card-img-top" alt="product">
+            <div class="card-body">
+                <h5 class="card-title">@item.ShortDescription</h5>
+                <p class="card-text">@item.Category.Name</p>
+                <p class="card-text text-danger">@item.Price$ </p>
+                <a href="#" class="btn btn-warning">Buy</a>
+            </div>
+        </div>
+    }
+</div>
+
