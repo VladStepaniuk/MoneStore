@@ -25,6 +25,16 @@ namespace MoneStore.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> ProductPage(int? id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+            var product = await _productRepository.GetById((int)id);
+            return View(product);
+        }
+
         // GET: Products
         public async Task<IActionResult> Index()
         {

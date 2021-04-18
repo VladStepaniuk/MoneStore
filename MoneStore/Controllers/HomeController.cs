@@ -41,9 +41,21 @@ namespace MoneStore.Controllers
             return View();
         }
 
-        public IActionResult Products(int? id)
+        public async Task<IActionResult> Products(int? id)
         {
-            return View();
+            var model = new ProductsViewModel();
+            if(id != null)
+            {
+                Category categ = await _categoryManager.GetCategoryById((int)id);
+                model.Category = categ;
+                model.Products = categ.Products.ToList();
+            }
+            else
+            {
+                model.Category = null;
+                model.Products = await _productManager.GetProductList();
+            }
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

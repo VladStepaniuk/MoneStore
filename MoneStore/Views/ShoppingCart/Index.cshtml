@@ -1,0 +1,65 @@
+﻿@model MoneStore.Models.ViewModels.ShoppingCartIndexViewModel
+@using System.Globalization
+
+<div class="row checkoutForm" style="margin-bottom:250px;">
+    <div style="background-color:rgba(248,248,248,0.6);">
+        <h2>
+            Your shopping cart
+            <br />Here are the products in your shopping cart.
+        </h2>
+    </div>
+    <table class="table table-hover table-dark table-stripped table-bordered">
+        <thead>
+            <tr>
+                <th>Selected amount</th>
+                <th>Product</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+            {
+                <tr>
+                    <td class="text-center">@line.Amount</td>
+                    <td class="text-left"><a class="btn btn-info" asp-controller="Food" asp-action="Index" asp-route-id="@line.Product.Id">@line.Product.ShortDescription</a></td>
+                    <td class="text-right">@line.Product.Price.ToString("c", CultureInfo.CreateSpecificCulture("en-US"))</td>
+                    <td class="text-right">
+                        @((line.Amount * line.Product.Price).ToString("c",CultureInfo.CreateSpecificCulture("en-US")))
+                    </td>
+                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="ShoppingCart" asp-action="Remove" asp-route-foodId="@line.Product.Id"></a></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">
+                    @(Model.ShoppingCartTotal.ToString("c",CultureInfo.CreateSpecificCulture("en-US")))
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    @if (ViewBag.InvalidAmountText != null)
+    {
+        <div>
+            <p class="invalidAmount">@ViewBag.InvalidAmountText</p>
+        </div>
+    }
+    <div>
+        <a class="btn btn-back" asp-action="Back" asp-route-returnUrl="@Model.ReturnUrl">Back</a>
+    </div>
+    @if (Model.ShoppingCart.ShoppingCartItems.Count() != 0)
+    {
+        <div class="text-right" style="float:right">
+            <div class="btn-group ">
+                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Your cart is empty, add some items to order them</p>
+    }
+</div>

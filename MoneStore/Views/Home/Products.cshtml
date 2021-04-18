@@ -1,8 +1,28 @@
-﻿
+﻿@model MoneStore.Models.ViewModels.ProductsViewModel
 @{
     ViewData["Title"] = "Products";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Products</h1>
+
+@if (Model.Products.Any())
+{
+    foreach (var item in Model.Products)
+    {
+        <div class="card" style="width: 18rem;">
+            <img src="data:image/*;base64,@(Convert.ToBase64String(item.PreviewIage))" class="card-img-top" alt="product">
+            <div class="card-body">
+                <h5 class="card-title">@item.ShortDescription</h5>
+                <p class="card-text">@item.Category.Name</p>
+                <p class="card-text text-danger">@item.Price$ </p>
+                <a href="#" class="btn btn-warning">Buy</a>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>Looks like here is no products!</p>
+}
 
