@@ -48,6 +48,7 @@ namespace MoneStore
 
             services.AddScoped<CategoryManager>();
             services.AddScoped<ProductManager>();
+            services.AddScoped<ShoppingCart>();
 
             services.AddControllersWithViews();
             

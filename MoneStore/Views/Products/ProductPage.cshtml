@@ -1,4 +1,4 @@
-﻿@model MoneStore.Models.Product
+﻿@model MoneStore.Models.ViewModels.ProductIndexViewModel
 @{
     ViewData["Title"] = "ProductPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,11 +8,11 @@
 <div class="spacer-20"></div>
 <div class="row">
     <div class="col-md-6">
-        <img src="data:image/*;base64,@(Convert.ToBase64String(Model.PreviewIage))" class="card-img-top"/>
+        <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Image))" class="card-img-top"/>
     </div>
     <div class="col-md-6">
         <div class="description">
-            <p>@Model.LongDescription</p>
+            <p>@Model.LongDescrip</p>
         </div>
         <div class="category-text">
             <p>Category: @Model.Category.Name</p>

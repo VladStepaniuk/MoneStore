@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MoneStore.Data;
 using MoneStore.Models;
+using MoneStore.Models.ViewModels;
 using MoneStore.Work.Repository;
 
 namespace MoneStore.Controllers
@@ -31,8 +32,21 @@ namespace MoneStore.Controllers
             {
                 return null;
             }
+
             var product = await _productRepository.GetById((int)id);
-            return View(product);
+
+            var model = new ProductIndexViewModel
+            {
+                Id = product.Id,
+                ShortDescrip = product.ShortDescription,
+                LongDescrip = product.LongDescription,
+                Price = product.Price,
+                Image = product.PreviewIage,
+                inStock = product.inStock,
+                Category = product.Category
+            };
+            
+            return View(model);
         }
 
         // GET: Products

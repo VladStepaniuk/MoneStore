@@ -41,7 +41,7 @@
                 <h5 class="card-title">@item.ShortDescription</h5>
                 <p class="card-text">@item.Category.Name</p>
                 <p class="card-text text-danger">@item.Price$ </p>
-                <a href="#" class="btn btn-warning">Buy</a>
+                <a asp-controller="Products" asp-action="ProductPage" asp-route-id="@item.Id" class="btn btn-warning">Buy</a>
             </div>
         </div>
     }
