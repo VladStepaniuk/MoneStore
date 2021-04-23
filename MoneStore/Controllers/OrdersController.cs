@@ -14,7 +14,6 @@ namespace MoneStore.Controllers
         private readonly ProductManager _productManager;
         public IActionResult Checkout()
         {
-            var items = _shoppingCart.
             return View();
         }
     }
